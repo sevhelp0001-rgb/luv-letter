@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love Letter for Beng</title>
+<style>
+:root{
+  --bg:#fdf5f0;
+  --envelope:#d96a7b;
+  --paper:#fff8f0;
+  --accent:#a23344;
+  --shadow:rgba(0,0,0,0.12);
+  --sans:"Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin:0;
+  padding:0;
+  font-family: var(--sans);
+  background: linear-gradient(to bottom, #fffaf5, #f4e6e0);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  overflow:hidden;
+  position:relative;
+}
+
+/* flowers container */
+.flowers {
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* individual tulip */
+.tulip {
+  width:20px;
+  height:40px;
+  background:#ff6f91;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+/* envelope wrapper */
+.envelope-wrap{
+  width:340px;
+  perspective:1200px;
+  position:relative;
+  z-index:1;
+}
+
+/* envelope */
+.envelope{
+  width:100%;
+  height:220px;
+  position:relative;
+  transform-style:preserve-3d;
+  cursor:pointer;
+}
+
+/* flap */
+.flap{
+  position:absolute;
+  top:-2px;
+  left:0;
+  right:0;
+  height:100px;
+  transform-origin:top;
+  transition: transform 0.7s cubic-bezier(.2,.85,.25,1);
+}
+.flap::before{
+  content:"";
+  display:block;
+  width:100%;
+  height:100%;
+  background:linear-gradient(180deg,#f5ccd3,#f2b3be);
+  clip-path: polygon(50% 0%,100% 100%,0% 100%);
+  border-radius:12px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.12) inset;
+}
+
+/* envelope body */
+.body{
+  position:absolute;
+  inset:0;
+  background:var(--envelope);
+  border-radius:12px;
+  box-shadow:0 15px 30px var(--shadow);
+}
+
+/* seal */
+.seal{
+  position:absolute;
+  top:55px;
+  left:50%;
+  transform:translateX(-50%);
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:radial-gradient(circle,#ffd7df,#f3a3b1 60%,var(--accent));
+  box-shadow:0 6px 18px rgba(0,0,0,0.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:20px;
+  font-weight:700;
+  pointer-events:none;
+}
+
+/* letter */
+.letter{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:88%;
+  height:88%;
+  background:var(--paper);
+  border-radius:10px;
+  padding:24px;
+  box-shadow:0 18px 40px var(--shadow);
+  font-family:var(--sans);
+  line-height:1.55;
+  transition:transform .8s, opacity .5s;
+  overflow:auto;
+  opacity:0;
+  z-index:1;
+}
+
+/* states */
+.closed .letter{ transform:translate(-50%, 100%); }
+.opened .letter{ transform:translate(-50%, -10px); opacity:1; }
+.opened .flap{ transform:rotateX(-180deg); }
+.opened.envelope{ transform:translateY(-20px); }
+
+/* text */
+.message{
+  font-family:var(--sans);
+  font-size:15px;
+  white-space:pre-wrap;
+  font-variant:small-caps;
+}
+.signature{
+  margin-top:18px;
+  font-weight:bold;
+  font-family:var(--sans);
+}
+
+/* music button */
+.music-btn{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#ffd7df;
+  border:2px solid #a23344;
+  border-radius:50%;
+  width:50px;
+  height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  cursor:pointer;
+  z-index:2;
+  transition:transform 0.2s;
+}
+.music-btn:hover{ transform:scale(1.1); }
+</style>
+</head>
+<body>
+
+<div class="envelope-wrap">
+  <div id="envelope" class="envelope closed" tabindex="0">
+    <div class="flap"></div>
+    <div class="body"></div>
+    <div class="seal">❤</div>
+
+    <div class="letter">
+      <div class="message">
+beng,
+
+happy birthday, love. i know we’re celebrating this one from a distance again, but i hope you still feel how much i’m thinking about you today. if i could teleport, i’d already be there annoying you, hugging you, and stealing your food.
+
+sometimes i wonder what i did to deserve you — to deserve your love. not a single day goes by when i don’t spend time thinking about you. there’s nothing i can write or say to fully express what you mean to me. i never thought someone could feel so much like home or make all my problems disappear until i met you. there’s no one like you. i can’t wait to be able to hug you, take cute pics, and tell you all of this in real life. you have my heart beng :)
+
+thank you for being you — for the patience, the laughs, the random things we talked, and the way you somehow make everything feel lighter even when we’re far apart. you have no idea how much i appreciate you, beng.
+
+i hope your day is chill and full of things you enjoy. you deserve a good birthday, good energy, and good food (and yes, you better eat something nice). one day soon, we’ll celebrate in person, okay? no more calls — just us.
+
+enjoy your day, beng. i love you.
+      </div>
+      <div class="signature">— kael</div>
+    </div>
+  </div>
+</div>
+
+<!-- tulips container -->
+<div class="flowers" id="flowers"></div>
+
+<!-- music button -->
+<div class="music-btn" id="musicBtn">♫</div>
+<audio id="bgMusic" src="https://drive.google.com/uc?export=download&id=1ERqyAmxgdd0h6PIpmTEdbQumPZTwhDHL"></audio>
+
+<script>
+const envelope = document.getElementById("envelope");
+const flowersContainer = document.getElementById("flowers");
+const musicBtn = document.getElementById("musicBtn");
+const music = document.getElementById("bgMusic");
+let open=false;
+
+// create tulips
+for(let i=0;i<12;i++){
+  const tulip=document.createElement('div');
+  tulip.className='tulip';
+  flowersContainer.appendChild(tulip);
+}
+
+// envelope toggle
+envelope.addEventListener("click",()=>{
+  open=!open;
+  envelope.classList.toggle("opened",open);
+  envelope.classList.toggle("closed",!open);
+
+  if(open){
+    // animate tulips
+    const tulips=document.querySelectorAll('.tulip');
+    tulips.forEach((t,i)=>{
+      setTimeout(()=>{ t.style.transform='scaleY(1)'; t.style.opacity='1'; }, i*150);
+    });
+  } else {
+    const tulips=document.querySelectorAll('.tulip');
+    tulips.forEach((t)=>{ t.style.transform='scaleY(0)'; t.style.opacity='0'; });
+  }
+});
+
+// music button
+musicBtn.addEventListener('click',()=>{
+  if(music.paused){ music.play(); } else { music.pause(); }
+});
+</script>
+</body>
+</html>
